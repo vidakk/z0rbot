@@ -6,6 +6,7 @@ import random
 
 load_dotenv()
 discordToken = os.environ.get('DISCORD_TOKEN')
+botChannel = os.environ.get('DISCORD_BOT_CHANNEL')
 class MyClient(discord.Client):
 
     async def brokenChain(self,channel,message):
@@ -30,7 +31,7 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user}!')
 
     async def on_message(self, message):
-        c_channel = discord.utils.get(message.guild.text_channels, name='bot-testing')
+        c_channel = discord.utils.get(message.guild.text_channels, name=botChannel)
 
         if message.author == client.user:
             return
