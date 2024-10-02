@@ -19,12 +19,12 @@ class MyClient(discord.Client):
 
         selectedMmessage = random.choice(messageList).format(name=message.author.display_name)
 
-        #try:
-        await channel.send(selectedMmessage)
+        try:
+            await channel.send(selectedMmessage)
             #await channel.send(f'Hey, looks like {message.author.display_name} fucked up the z0r chain! Everyone laugh at them! ')
-        await message.author.timeout(datetime.timedelta(seconds=60))
-        #except Exception as e:
-            #print("an error occured")
+            await message.author.timeout(datetime.timedelta(seconds=60))
+        except Exception as e:
+            await channel.send(f'Unfortunately, their role is higher than mine so I cannot take punitive actions.')
 
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
