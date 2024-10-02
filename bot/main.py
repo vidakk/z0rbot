@@ -2,14 +2,29 @@ import os
 import discord
 import datetime
 from dotenv import load_dotenv
+import random
 
 load_dotenv()
 discordToken = os.environ.get('DISCORD_TOKEN')
 class MyClient(discord.Client):
 
     async def brokenChain(self,channel,message):
-        await channel.send(f'Hey, looks like {message.author.display_name} fucked up the z0r chain! Everyone laugh at them! ')
+
+        messageList = [
+            'Hey, looks like {name} fucked up the z0r chain! Everyone laugh at them!',
+            "Some people can follow simple instructions. {name} apparently isn't one of them",
+            'Navigating the current political landscape is hard, navigating the current z0r chain is not, {name}!',
+            'Then God looked over all he had made, and he saw that {name} had fucked it up'
+        ]
+
+        selectedMmessage = random.choice(messageList).format(name=message.author.display_name)
+
+        #try:
+        await channel.send(selectedMmessage)
+            #await channel.send(f'Hey, looks like {message.author.display_name} fucked up the z0r chain! Everyone laugh at them! ')
         await message.author.timeout(datetime.timedelta(seconds=60))
+        #except Exception as e:
+            #print("an error occured")
 
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
