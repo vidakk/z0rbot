@@ -4,6 +4,6 @@ ENV PYTHONDONTWRITEBYTECODE=1
 WORKDIR /app
 
 RUN python -m pip install discord.py python-dotenv
-ENV PYTHONBUFFERED 1
+#ENV PYTHONBUFFERED 1
 COPY . .
-CMD python3 -m main.py
+CMD python3 -u main.py

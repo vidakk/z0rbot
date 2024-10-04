@@ -27,9 +27,9 @@ class MyClient(discord.Client):
         try:
             await channel.send(selectedMmessage)
             #await channel.send(f'Hey, looks like {message.author.display_name} fucked up the z0r chain! Everyone laugh at them! ')
-            await message.author.timeout(datetime.timedelta(seconds=60))
+            #await message.author.timeout(datetime.timedelta(seconds=60))
         except Exception as e:
-            print(f'Unfortunately, their role is higher than mine so I cannot take punitive actions.')
+            print(f'An error has occured.')
 
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
