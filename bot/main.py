@@ -16,7 +16,7 @@ class MyClient(discord.Client):
             "Some people can follow simple instructions. {name} apparently isn't one of them",
             'Navigating the current political landscape is hard, navigating the current z0r chain is not, {name}!',
             'Then God looked over all he had made, and he saw that {name} had fucked it up',
-            'Once upon a time there was a z0r chain. "Was" because you fucked it up {Name}',
+            'Once upon a time there was a z0r chain. "Was" because you fucked it up {name}',
             'And I looked, and behold a pale horse: and his name that sat on him was Death, and Failure followed with him. Your failure, {name}',
             "Enemies are red, allies are blue, {name} cant z0r, so it\'s a timeout for you",
             'Do you want a doomsday today, {name}?'
