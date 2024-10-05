@@ -22,10 +22,10 @@ class MyClient(discord.Client):
             'Do you want a doomsday today, {name}?'
         ]
 
-        selectedMmessage = random.choice(messageList).format(name=message.author.display_name)
+        selectedMessage = random.choice(messageList).format(name=message.author.display_name)
 
         try:
-            await channel.send(selectedMmessage)
+            await channel.send(selectedMessage)
             #await channel.send(f'Hey, looks like {message.author.display_name} fucked up the z0r chain! Everyone laugh at them! ')
             #await message.author.timeout(datetime.timedelta(seconds=60))
         except Exception as e:
