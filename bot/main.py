@@ -44,22 +44,20 @@ class MyClient(discord.Client):
             print(f'Message from {message.author}: {message.content} in {message.channel}')
             messages = [message async for message in c_channel.history(limit=2)]
 
-            if messages[0].content == 'z':
-                if messages[1].content == 'z':
-                    await self.brokenChain(c_channel,message)
-            elif messages[0].content == '0':
-                if messages[1].content == 'z':
-                    return
-                else:
-                    await self.brokenChain(c_channel,message)
+            if len(messages) < 2:
+                return  # Ensure there are at least two messages to compare
 
-            elif messages[0].content == 'r':
-                if messages[1].content == '0':
-                    return
-                else:
-                    await self.brokenChain(c_channel,message)
-            else:
-                await self.brokenChain(c_channel,message)
+            def default_action():
+                return self.brokenChain(c_channel, message)
+
+            switch = {
+                'z': lambda: self.brokenChain(c_channel, message) if messages[1].content == 'z' else None(),
+                '0': lambda: None if messages[1].content == 'z' else self.brokenChain(c_channel, message),
+                'r': lambda: None if messages[1].content == '0' else self.brokenChain(c_channel, message)
+            }
+
+            action = switch.get(messages[0].content, default_action)
+            await action()
 
 
 intents = discord.Intents.default()
