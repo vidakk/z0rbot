@@ -29,7 +29,7 @@ class MyClient(discord.Client):
             #await channel.send(f'Hey, looks like {message.author.display_name} fucked up the z0r chain! Everyone laugh at them! ')
             #await message.author.timeout(datetime.timedelta(seconds=60))
         except Exception as e:
-            print(f'An error has occured.')
+            print(f'An error has occurred: {str(e)}')
 
     async def on_ready(self):
         print(f'Logged on as {self.user}!')
@@ -51,7 +51,7 @@ class MyClient(discord.Client):
                 return self.brokenChain(c_channel, message)
 
             switch = {
-                'z': lambda: self.brokenChain(c_channel, message) if messages[1].content == 'z' else None(),
+                'z': lambda: self.brokenChain(c_channel, message) if messages[1].content == 'z' else None,
                 '0': lambda: None if messages[1].content == 'z' else self.brokenChain(c_channel, message),
                 'r': lambda: None if messages[1].content == '0' else self.brokenChain(c_channel, message)
             }
