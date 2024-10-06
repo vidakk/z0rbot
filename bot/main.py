@@ -47,13 +47,16 @@ class MyClient(discord.Client):
             if len(messages) < 2:
                 return  # Ensure there are at least two messages to compare
 
-            def default_action():
-                return self.brokenChain(c_channel, message)
+            async def default_action():
+                await self.brokenChain(c_channel, message)
+            async def doNothing():
+                pass
+
 
             switch = {
-                'z': lambda: self.brokenChain(c_channel, message) if messages[1].content == 'z' else None,
-                '0': lambda: None if messages[1].content == 'z' else self.brokenChain(c_channel, message),
-                'r': lambda: None if messages[1].content == '0' else self.brokenChain(c_channel, message)
+                'z': lambda: self.brokenChain(c_channel, message) if messages[1].content == 'z' else doNothing(),
+                '0': lambda: doNothing() if messages[1].content == 'z' else self.brokenChain(c_channel, message),
+                'r': lambda: doNothing() if messages[1].content == '0' else self.brokenChain(c_channel, message)
             }
 
             action = switch.get(messages[0].content, default_action)
