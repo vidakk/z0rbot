@@ -17,3 +17,11 @@ variable "discord_token" {
   type      = string
   sensitive = true
 }
+
+variable "ghcr_username" {
+  type = string
+}
+variable "ghcr_password" {
+  type      = string
+  sensitive = true
+}

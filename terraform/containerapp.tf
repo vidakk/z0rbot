@@ -14,11 +14,15 @@ resource "azurerm_container_app" "z0rbot-ca" {
     type = "SystemAssigned"
   }
 
-  #    registry {
-  #        server = "ghcr.io"
-  #        username = "var.ghcr_username"
-  #        password_secret_name = azurerm_key_vault_secret.github_token.name
-  #    }
+  secret {
+    name  = "ghcr-password"
+    value = var.ghcr_password
+  }
+  registry {
+    server               = "ghcr.io"
+    username             = var.ghcr_username
+    password_secret_name = "ghcr-password"
+  }
 
   template {
     container {
