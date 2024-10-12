@@ -1,0 +1,33 @@
+name: Build and publish bot
+
+on:
+  push:
+
+defaults:
+  run:
+    working-directory: botv2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+
+    - name: Build and publish .NET app
+      run: dotnet publish -c Release -o out
+
+    - name: GHCR Login
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ghcr.io/${{ github.repository }}/my-dotnet-app:latest .
+
+    - name: Push Docker image to GitHub Container Registry
+      run: docker push ghcr.io/${{ github.repository }}/my-dotnet-app:latest
