@@ -1,19 +1,19 @@
 variable "resource_group_name" {
-    default = "rg-z0rbot-westeurope-001"
+  default = "rg-z0rbot-westeurope-001"
 }
 
 variable "location" {
-    default = "westeurope"
+  default = "westeurope"
 }
 
 variable "container_app_environment_name" {
-    default = "cae-z0rbot-westeurope-001"
+  default = "cae-z0rbot-westeurope-001"
 }
 
 variable "container_app_name" {
-    default = "ca-z0rbot-westeurope-001"
+  default = "ca-z0rbot-westeurope-001"
 }
 variable "discord_token" {
-    type = string
-    sensitive = true
+  type      = string
+  sensitive = true
 }
