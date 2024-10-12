@@ -3,6 +3,11 @@ name: Build and publish bot
 on:
   push:
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 defaults:
   run:
     working-directory: botv2
