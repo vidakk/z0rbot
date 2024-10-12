@@ -33,7 +33,7 @@ resource "azurerm_container_app" "z0rbot-ca" {
 
       env {
         name  = "DISCORD_TOKEN"
-        value = "var.discord_token"
+        value = var.discord_token
       }
     }
   }
