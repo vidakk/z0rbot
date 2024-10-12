@@ -14,9 +14,8 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
+COPY appsettings.json .
 
-# Expose the port the app runs on
-EXPOSE 80
 
 # Run the application
 ENTRYPOINT ["dotnet", "botv2.dll"]
