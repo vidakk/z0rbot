@@ -35,6 +35,11 @@ resource "azurerm_container_app" "z0rbot-ca" {
         name  = "DISCORD_TOKEN"
         value = var.discord_token
       }
+
+      env {
+        name = "DISCORD_BOT_CHANNEL"
+        value = "bot-testing"
+      }
     }
   }
 }
