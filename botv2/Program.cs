@@ -93,7 +93,8 @@ class Program
 
     private async Task BrokenChain(ISocketMessageChannel channel, SocketMessage message)
     {
-        var UNick = ((message.Author as IGuildUser)?.Nickname ?? (message.Author as IGuildUser)?.Username);
+        var UNick = (message.Author as IGuildUser)?.DisplayName;
+        //var UNick = (message.Author as IGuildUser)?.Nickname ?? (message.Author as IGuildUser)?.Username;
         var selectedMessage = string.Format(Messages.MessageList[_random.Next(Messages.MessageList.Length)], UNick);
 
         try
