@@ -38,7 +38,7 @@ resource "azurerm_container_app" "z0rbot-ca" {
 
       env {
         name  = "DISCORD_BOT_CHANNEL"
-        value = "bot-testing"
+        value = "aaaaaaa-chains"
       }
     }
   }
