@@ -93,9 +93,28 @@ class Program
 
     private async Task BrokenChain(ISocketMessageChannel channel, SocketMessage message)
     {
-        var UNick = (message.Author as IGuildUser)?.DisplayName;
-        //var UNick = (message.Author as IGuildUser)?.Nickname ?? (message.Author as IGuildUser)?.Username;
-        var selectedMessage = string.Format(Messages.MessageList[_random.Next(Messages.MessageList.Length)], UNick);
+        var guild = (channel as IGuildChannel)?.Guild;
+        if (guild == null)
+        {
+            Console.WriteLine("Guild is null.");
+            return;
+        }
+
+        var restClient = (_client as DiscordSocketClient)?.Rest;
+        if (restClient == null)
+        {
+            Console.WriteLine("RestClient is null.");
+            return;
+        }
+
+        var restUser = await restClient.GetGuildUserAsync(guild.Id, message.Author.Id);
+        if (restUser == null)
+        {
+            Console.WriteLine("User is null.");
+            return;
+        }
+
+        var selectedMessage = string.Format(Messages.MessageList[_random.Next(Messages.MessageList.Length)], restUser.DisplayName);
 
         try
         {
@@ -103,7 +122,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error has occured: {ex.Message}");
+            Console.WriteLine($"An error has occurred: {ex.Message}");
         }
     }
 }
