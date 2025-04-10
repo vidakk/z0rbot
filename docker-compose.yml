@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  botv2:
+    build:
+      context: ./botv2
+      dockerfile: Dockerfile
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - DISCORD_BOT_CHANNEL=${DISCORD_BOT_CHANNEL}
+    restart: unless-stopped
